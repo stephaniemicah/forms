@@ -31,9 +31,7 @@
     <button class="button">Login</button>
   </div>
 
-  @if (form.form.controls['email'].touched &&
-       form.form.controls['password'].touched &&
-       form.form.invalid ) {
+  @if (email.touched && password.touched && form.form.invalid ) {
     <p class="control-error">Invalid values detected. Please check your input.</p>
   }
 </form>
