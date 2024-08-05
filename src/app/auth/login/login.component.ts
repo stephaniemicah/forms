@@ -9,7 +9,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  form = new FormGroup({
+  loginForm = new FormGroup({
     email: new FormControl(''),
     password: new FormControl('')
   });
