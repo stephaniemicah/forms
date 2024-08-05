@@ -27,6 +27,14 @@ export class LoginComponent {
     );
   }
 
+  get passwordIsInvalid() {
+    return (
+      this.loginForm.controls.password.touched &&
+      this.loginForm.controls.password.dirty &&
+      this.loginForm.controls.password.invalid
+    );
+  }
+
   onSubmit() {
     console.log(this.loginForm);
     const enteredEmail = this.loginForm.value.email;
