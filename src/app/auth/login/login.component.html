@@ -9,9 +9,21 @@
 
     <div class="control no-margin">
       <label for="password">Password</label>
-      <input id="password" type="password" name="password" ngModel required minlength="6"/>
+      <input
+        id="password"
+        type="password"
+        name="password"
+        ngModel
+        required
+        minlength="6"/>
     </div>
 
     <button class="button">Login</button>
   </div>
+
+  @if (form.form.controls['email'].touched &&
+       form.form.controls['password'].touched &&
+       form.form.invalid ) {
+    <p class="control-error">Invalid values detected. Please check your input.</p>
+  }
 </form>
