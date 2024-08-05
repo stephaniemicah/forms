@@ -10,13 +10,22 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class LoginComponent {
   loginForm = new FormGroup({
+
     email: new FormControl('', {
       validators: [Validators.email, Validators.required]
     }),
     password: new FormControl('', {
       validators: [Validators.required, Validators.minLength(6)],
-    })
+    }),
   });
+
+  get emailIsInvalid() {
+    return (
+      this.loginForm.controls.email.touched &&
+      this.loginForm.controls.email.dirty &&
+      this.loginForm.controls.email.invalid
+    );
+  }
 
   onSubmit() {
     console.log(this.loginForm);
