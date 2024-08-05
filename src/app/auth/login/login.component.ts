@@ -15,6 +15,7 @@ export class LoginComponent {
   });
 
   onSubmit() {
+    console.log(this.loginForm);
     
   }
 }
