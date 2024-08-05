@@ -5,6 +5,8 @@ function mustContainQuestionMark(control: AbstractControl) {
   if (control.value.contains('?')) {
     return null;
   }
+
+  return { doesNotContainQuestionMark: true }
 }
 @Component({
   selector: 'app-login',
