@@ -13,10 +13,12 @@ export class LoginComponent {
 
   constructor() {
     afterNextRender(() => {
-      this.form().valueChanges?.subscribe();
+      const subscription = this.form().valueChanges?.subscribe({
+        next: (value) => console.log(value)
+      });
     });
   }
-  
+
   onSubmit(formData: NgForm) {
     if (formData.form.invalid) {
       return;
