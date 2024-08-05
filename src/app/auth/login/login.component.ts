@@ -9,8 +9,8 @@ import { FormsModule, NgForm } from '@angular/forms';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  private form = viewChild<NgForm>('form');
-  
+  private form = viewChild.required<NgForm>('form');
+
   onSubmit(formData: NgForm) {
     if (formData.form.invalid) {
       return;
