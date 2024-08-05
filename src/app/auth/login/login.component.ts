@@ -15,7 +15,11 @@ export class LoginComponent {
   constructor() {
     afterNextRender(() => {
       const subscription = this.form().valueChanges?.subscribe({
-        next: (value) => console.log(value)
+        next: (value) =>
+          window.localStorage.setItem(
+            'saved-login-form',
+            JSON.stringify({email: value.email})
+          ),
       });
 
       this.destroyRef.onDestroy(() => subscription?.unsubscribe());
