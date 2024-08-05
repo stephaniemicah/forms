@@ -1,4 +1,4 @@
-import { Component, viewChild } from '@angular/core';
+import { afterNextRender, Component, viewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
@@ -11,6 +11,12 @@ import { FormsModule, NgForm } from '@angular/forms';
 export class LoginComponent {
   private form = viewChild.required<NgForm>('form');
 
+  constructor() {
+    afterNextRender(() => {
+      this.form().valueChanges?.subscribe();
+    });
+  }
+  
   onSubmit(formData: NgForm) {
     if (formData.form.invalid) {
       return;
