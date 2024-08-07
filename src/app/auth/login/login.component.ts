@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { of } from 'rxjs';
+import { debounceTime, of } from 'rxjs';
 
 function mustContainQuestionMark(control: AbstractControl) {
   if (control.value.includes('?')) {
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.loginForm.valueChanges.subscribe({
+    this.loginForm.valueChanges.pipe(debounceTime(500)).subscribe({
       next: value => {
         window.localStorage.setItem('saved-login-form', JSON.stringify({email: value.email})
       );
