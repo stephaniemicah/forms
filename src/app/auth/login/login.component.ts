@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { of } from 'rxjs';
 
@@ -26,7 +26,7 @@ function emailIsUnique(control: AbstractControl) {
   styleUrl: './login.component.css',
 })
 
-export class LoginComponent {
+export class LoginComponent implements OnInit{
   loginForm = new FormGroup({
 
     email: new FormControl('', {
@@ -53,6 +53,10 @@ export class LoginComponent {
       this.loginForm.controls.password.dirty &&
       this.loginForm.controls.password.invalid
     );
+  }
+
+  ngOnInit(): void {
+    
   }
 
   onSubmit() {
