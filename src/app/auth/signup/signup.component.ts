@@ -9,6 +9,16 @@ import { debounceTime, of } from 'rxjs';
 
 //   return { doesNotContainQuestionMark: true };
 // }
+function equalValues(control: AbstractControl) {
+  const password = control.get('password')?.value;
+  const confirmPassword = control.get('confirmPassword')?.value;
+
+  if (password === confirmPassword) {
+    return null;
+  }
+
+  return { passwordNotEqual: true};
+}
 
 function emailIsUnique(control: AbstractControl) {
   if(control.value !== 'test@example.com') {
@@ -42,14 +52,19 @@ export class SignupComponent {
       validators: [Validators.email, Validators.required],
       asyncValidators: [emailIsUnique],
     }),
-    passwords: new FormGroup({
+    passwords: new FormGroup(
+      {
       password: new FormControl('', {
         validators: [Validators.required, Validators.minLength(6)],
       }),
       confirmPassword: new FormControl('', {
         validators: [Validators.required, Validators.minLength(6)],
       }),
-    }),
+      },
+        {
+          validators: [equalValues],
+        }
+    ),
     firstName: new FormControl('', { validators: [Validators.required] }),
     lastName: new FormControl('', { validators: [Validators.required] }),
     address: new FormGroup({
