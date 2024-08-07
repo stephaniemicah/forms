@@ -108,10 +108,15 @@ export class SignupComponent {
   }
 
   onSubmit() {
+    if (this.signupForm.invalid) {
+      console.log('INVALID FORM');
+      return;
+    }
     console.log(this.signupForm);
-    const enteredEmail = this.signupForm.value.email;
+    // const enteredEmail = this.signupForm.value.email;
     //const enteredPassword = this.signupForm.value.password;
     //console.log(enteredEmail, enteredPassword);
+
   }
 
   onReset(){
