@@ -1,5 +1,5 @@
 import { Component, DestroyRef, inject } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { debounceTime, of } from 'rxjs';
 
 // function mustContainQuestionMark(control: AbstractControl) {
@@ -61,6 +61,11 @@ export class SignupComponent {
     role: new FormControl<
     'student' | 'teacher' | 'employee' | 'founder' | 'other'
     >('student', { validators: [Validators.required]}),
+    source: new FormArray([
+      new FormControl(false),
+      new FormControl(false),
+      new FormControl(false),
+    ]),
     agree: new FormControl(false, { validators: [Validators.required] })
   });
 
