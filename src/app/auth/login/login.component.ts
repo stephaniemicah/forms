@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { debounceTime, of } from 'rxjs';
 
@@ -27,6 +27,8 @@ function emailIsUnique(control: AbstractControl) {
 })
 
 export class LoginComponent implements OnInit{
+  private destroyRef = inject(DestroyRef);
+  
   loginForm = new FormGroup({
 
     email: new FormControl('', {
@@ -58,8 +60,10 @@ export class LoginComponent implements OnInit{
   ngOnInit(): void {
     this.loginForm.valueChanges.pipe(debounceTime(500)).subscribe({
       next: value => {
-        window.localStorage.setItem('saved-login-form', JSON.stringify({email: value.email})
-      );
+        window.localStorage.setItem(
+          'saved-login-form',
+          JSON.stringify({email: value.email})
+        );
       },
     })
   }
