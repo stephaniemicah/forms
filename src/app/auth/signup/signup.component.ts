@@ -42,11 +42,13 @@ export class SignupComponent {
       validators: [Validators.email, Validators.required],
       asyncValidators: [emailIsUnique],
     }),
-    password: new FormControl('', {
-      validators: [Validators.required, Validators.minLength(6)],
-    }),
-    confirmPassword: new FormControl('', {
-      validators: [Validators.required, Validators.minLength(6)],
+    passwords: new FormGroup({
+      password: new FormControl('', {
+        validators: [Validators.required, Validators.minLength(6)],
+      }),
+      confirmPassword: new FormControl('', {
+        validators: [Validators.required, Validators.minLength(6)],
+      }),
     }),
     firstName: new FormControl('', { validators: [Validators.required] }),
     lastName: new FormControl('', { validators: [Validators.required] }),
@@ -68,13 +70,13 @@ export class SignupComponent {
     );
   }
 
-  get passwordIsInvalid() {
-    return (
-      this.signupForm.controls.password.touched &&
-      this.signupForm.controls.password.dirty &&
-      this.signupForm.controls.password.invalid
-    );
-  }
+  // get passwordIsInvalid() {
+  //   return (
+  //     this.signupForm.controls.password.touched &&
+  //     this.signupForm.controls.password.dirty &&
+  //     this.signupForm.controls.password.invalid
+  //   );
+  // }
 
   ngOnInit(): void {
     // const savedForm = window.localStorage.getItem('saved-login-form');
@@ -101,8 +103,8 @@ export class SignupComponent {
   onSubmit() {
     console.log(this.signupForm);
     const enteredEmail = this.signupForm.value.email;
-    const enteredPassword = this.signupForm.value.password;
-    console.log(enteredEmail, enteredPassword);
+    //const enteredPassword = this.signupForm.value.password;
+    //console.log(enteredEmail, enteredPassword);
   }
 
   onReset(){
