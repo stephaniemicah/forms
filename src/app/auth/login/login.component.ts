@@ -28,7 +28,7 @@ function emailIsUnique(control: AbstractControl) {
 
 export class LoginComponent implements OnInit{
   private destroyRef = inject(DestroyRef);
-  
+
   loginForm = new FormGroup({
 
     email: new FormControl('', {
@@ -58,14 +58,16 @@ export class LoginComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.loginForm.valueChanges.pipe(debounceTime(500)).subscribe({
+    const subscription = this.loginForm.valueChanges.pipe(debounceTime(500)).subscribe({
       next: value => {
         window.localStorage.setItem(
           'saved-login-form',
           JSON.stringify({email: value.email})
         );
       },
-    })
+    });
+
+    this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }
 
   onSubmit() {
